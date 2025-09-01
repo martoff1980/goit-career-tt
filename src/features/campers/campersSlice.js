@@ -5,7 +5,6 @@ import { fetchCampers } from '../../api/campersApi';
 
 export const loadCampers = createAsyncThunk('campers/load', async (_, { getState }) => {
 	const { filters, campers } = getState();
-	console.log('loadCampersDef:', '\nfiters:\n', filters, '\ncampers:\n', campers);
 	const data = await fetchCampers({
 		location: filters.location || undefined,
 		form: filters.form || undefined,
@@ -13,8 +12,6 @@ export const loadCampers = createAsyncThunk('campers/load', async (_, { getState
 		page: campers.page,
 		limit: campers.limit,
 	});
-	console.log('loadCampers:', '\nfiters:\n', filters, '\ncampers:\n', campers, '\ndata:\n', data);
-
 	return data;
 });
 
