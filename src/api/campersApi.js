@@ -10,7 +10,7 @@ export const fetchCampers = async ({ location, form, features = [], page = 1, li
 	params.set('page', page);
 	params.set('limit', limit);
 	const { data } = await axiosClient.get('/campers?' + params.toString());
-	return data;
+	return data['items'];
 };
 
 export const fetchCamperById = async (id) => {

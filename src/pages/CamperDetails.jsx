@@ -7,7 +7,7 @@ import { loadCamperById, clearCamper } from '../features/camperDetails/camperDet
 import Loader from '../components/Loader';
 import Gallery from '../components/Gallery';
 import RatingStars from '../components/RatingStars';
-import styled from 'styled-components';
+import { styled } from '@mui/material/styles'; //'styled-components';
 import { formatPrice } from '../utils/formatPrice';
 import { showNotify } from '../features/ui/uiSlice';
 

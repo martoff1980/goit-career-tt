@@ -1,2 +1,11 @@
-import Banner from '../components/Banner'
-export default function Home(){ return <Banner /> }
+/** @format */
+
+import Banner from '../components/Banner';
+
+export default function Home() {
+	return (
+		<>
+			<Banner />
+		</>
+	);
+}

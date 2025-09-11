@@ -1,41 +1,99 @@
+/** @format */
+
 import React, { useState } from 'react';
-import styled from 'styled-components'
-import { useDispatch, useSelector } from 'react-redux'
-import { setLocation, setForm, toggleFeature } from '../features/filters/filtersSlice'
-import { resetList, loadCampers } from '../features/campers/campersSlice'
+import { Outlet } from 'react-router-dom';
+import { Button, Box, useTheme, OutlinedInput, InputAdornment, Grid } from '@mui/material';
+import MapIcon from '@mui/icons-material/Map';
+import { useDispatch, useSelector } from 'react-redux';
+import { resetList, loadCampers } from '../features/campers/campersSlice';
+import VehicleEquipment from './VehicleEquipment';
+import VehicleType from './VehicleType';
 
-const Panel = styled.div`position:sticky; top:12px; background:#fff; border:1px solid ${({theme})=>theme.colors.border}; border-radius:${({theme})=>theme.radius}; box-shadow:${({theme})=>theme.shadow}; padding:16px;`
-const Row = styled.div`display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;`
-const featuresCatalog = ['AC','kitchen','bathroom','TV','radio','refrigerator','microwave','gas','water']
+export default function CamperFilters() {
+	const filters = useSelector((s) => s.filters);
+	const dispatch = useDispatch();
+	const apply = () => {
+		dispatch(resetList());
+		dispatch(loadCampers());
+	};
 
-export default function CamperFilters(){
-  const filters = useSelector(s=>s.filters)
-  const dispatch = useDispatch()
-  const apply = ()=>{
-    dispatch(resetList())
-    dispatch(loadCampers())
-  }
-  
-  return (
-    <Panel style={{width: '200px'}}>
-      <h4>Filters</h4>
-      <Row>
-        <input style={{height: '30px', border:'1px solid #75ed75',borderRadius: 10}} placeholder="Location" value={filters.location} onChange={(e)=>dispatch(setLocation(e.target.value))} />
-        <select style={{width: '100%', height: '30px', border:'1px solid #75ed75',borderRadius: 10,}} value={filters.form} onChange={(e)=>dispatch(setForm(e.target.value))}>
-          <option value="">Any form</option>
-          <option value="alcove">Alcove</option>
-          <option value="integrated">Integrated</option>
-          <option value="panelTruck">Panel Truck</option>
-        </select>
-      </Row>
-      <Row >
-        {featuresCatalog.map(f=>(
-          <label key={f}  style={{width: '100%', border:'1px solid #75ed75', borderRadius:10, padding:'4px 8px', backgroundColor: '#e0ffe0', cursor:'pointer'}}>
-            <input type="checkbox" checked={filters.features.includes(f)}  onChange={()=>dispatch(toggleFeature(f))} style={{marginRight:6}} /> {f}
-          </label>
-        ))}
-      </Row>
-      <button style={{width:'100%', height:'30px', backgroundColor: '#75ed75',borderRadius:10}} onClick={apply}>Apply</button>
-    </Panel>
-  )
+	return (
+		<>
+			<Box
+				className="Details-Box"
+				sx={{
+					width: '360px',
+					height: '800px',
+					border: '1px solid transparent',
+				}}>
+				<Box
+					className="Location-Box"
+					sx={{
+						paddingTop: '48px',
+						width: '360px',
+						height: '88px',
+					}}>
+					<Box
+						className="Location-Header"
+						sx={{
+							fontSize: '16px',
+							fontWeight: 400,
+							lineHeight: 1.5,
+						}}>
+						Location
+					</Box>
+					<OutlinedInput
+						sx={{
+							width: '360px',
+							height: '56px',
+							lineHeight: 1.5,
+							fontSize: '16px',
+							fontWeight: '400',
+							fontStyle: 'Regular',
+							borderRadius: '12px',
+							backgroundColor: '#F7F7F7',
+						}}
+						placeholder="Kyiv, Ukraine"
+						startAdornment={<InputAdornment position="start">{<MapIcon fontSize="small" />}</InputAdornment>}
+					/>
+				</Box>
+				<Box className="Filters-Box" sx={{ paddingTop: '40px' }}>
+					<Box
+						className="Filters-Title"
+						sx={{
+							fontSize: '16px',
+							fontWeight: 400,
+							fontStyle: 'medium',
+							lineHeight: 1.5,
+						}}>
+						Filters
+					</Box>
+					<Box
+						className="Vehicle-Box"
+						sx={{
+							marginTop: '32px',
+							width: '360px',
+							color: '#101828',
+						}}>
+						<VehicleEquipment />
+						<VehicleType />
+					</Box>
+				</Box>
+				<Button
+					className="Search-Button"
+					style={{
+						marginTop: '40px',
+						width: '166px',
+						height: '56px',
+						color: '#FFF',
+						backgroundColor: '#E44848',
+						borderRadius: '200px',
+					}}
+					onClick={apply}>
+					Search
+				</Button>
+			</Box>
+			<Outlet />
+		</>
+	);
 }

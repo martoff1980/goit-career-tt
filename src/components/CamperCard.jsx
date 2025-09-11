@@ -1,36 +1,106 @@
-import styled from 'styled-components'
-import { formatPrice } from '../utils/formatPrice'
-import { useDispatch, useSelector } from 'react-redux'
-import { toggleFavorite } from '../features/favorites/favoritesSlice'
-import { Link } from 'react-router-dom'
+/** @format */
 
-const Wrap = styled.article`display:grid; grid-template-columns:220px 1fr; gap:16px; background:#fff; border:1px solid ${({theme})=>theme.colors.border}; border-radius:${({theme})=>theme.radius}; box-shadow:${({theme})=>theme.shadow}; padding:16px;`
-const Thumb = styled.img`width:100%; height:160px; object-fit:cover; border-radius:12px;`
-const Btn = styled.button`padding:8px 12px; border-radius:10px; border:1px solid #e5e7eb; background:#fff;`
+// src/components/UntitledSvg.jsx
+import React from 'react';
+import { Box, Grid, Typography, Button } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { Padding } from '@mui/icons-material';
+import MapIcon from '@mui/icons-material/Map';
 
-export default function CamperCard({ camper }){
-  const favorites = useSelector(s=>s.favorites)
-  const dispatch = useDispatch()
-  const isFav = favorites.includes(camper.id)
-  console.log("camper.id:",camper)
+export default function CamperCard({ camper }) {
+	const favorites = useSelector((s) => s.favorites);
+	const dispatch = useDispatch();
+	const isFav = favorites.includes(camper.id);
 
-  return (
-    <Wrap>
-      <Thumb src={(camper.gallery && camper.gallery[0]) || camper.image || 'https://via.placeholder.com/400x300'} alt={camper.name} />
-      <div>
-        <header style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-          <h3 style={{margin:0}}>{camper.name}</h3>
-          <strong>{formatPrice(camper.price)}</strong>
-        </header>
-        <p style={{color:'#6b7280'}}>{camper.location}</p>
-        <div style={{display:'flex', gap:8, flexWrap:'wrap', margin:'8px 0'}}>
-          {['transmission','engine','AC','bathroom','kitchen','TV','radio','refrigerator','microwave','gas','water'].filter(k=>camper[k]).map(k=> <span key={k} style={{border:'1px solid #e5e7eb', padding:'4px 8px', borderRadius:10, fontSize:12}}>{k}</span>)}
-        </div>
-        <div style={{display:'flex', gap:8}}>
-          <Btn onClick={()=>dispatch(toggleFavorite(camper.id))}>{isFav ? '★ In favorites' : '☆ Add to favorites'}</Btn>
-          <Link to={`/catalog/${camper.id}`} target="_blank" rel="noopener"><Btn>Show more</Btn></Link>
-        </div>
-      </div>
-    </Wrap>
-  )
+	return (
+		<Box
+			className="Camper-Card"
+			sx={{
+				height: '368px',
+				border: '1px solid #DADDE1',
+				borderRadius: '20px',
+				overflow: 'hidden',
+			}}>
+			<Box
+				className="Card-Item"
+				sx={{
+					padding: '24px',
+					display: 'flex',
+					gap: '24px',
+				}}>
+				{/* Ліва картинка */}
+				<Box
+					className="Camper-Image"
+					sx={{
+						width: '292px',
+						height: '320px',
+						borderRadius: '10px',
+						bgcolor: '#DADDE1',
+						backgroundImage: `url(${camper.gallery[0].thumb})`,
+						backgroundSize: 'cover',
+					}}></Box>
+				{/* Права частина */}
+				<Box
+					className="Camper-Info"
+					sx={{
+						width: '524px',
+						display: 'flex',
+						flexDirection: 'column',
+					}}>
+					<Grid container>
+						<Grid
+							className="Camper-Info-Top"
+							item
+							sx={{
+								display: 'flex',
+								width: '100%',
+								justifyContent: 'space-between',
+								fontSize: '24px',
+								lineHeight: 1.33,
+							}}>
+							<Typography className="camper-name" sx={{ fontWeight: 600 }}>
+								{camper.name}
+							</Typography>
+							<Typography className="camper-price" sx={{ fontWeight: 600 }}>
+								€{camper.price}
+							</Typography>
+						</Grid>
+						<Grid item sx={{ mt: 1 }}>
+							<Typography
+								className="camper-location"
+								sx={{
+									fontSize: '16px',
+									fontWeight: 400,
+									lineHeight: 1.5,
+									display: 'flex',
+								}}>
+								<MapIcon fontSize="small" />
+								{camper.location}
+							</Typography>
+						</Grid>
+						<Grid item sx={{ mt: 2, height: '100hv', overflow: 'hidden' }}>
+							<Typography className="camper-description" fontWeight={700}>
+								{camper.description}
+							</Typography>
+						</Grid>
+					</Grid>
+					<Grid item sx={{ mt: 'auto' }}>
+						<Button
+							className="ShowMore-Button"
+							style={{
+								width: '166px',
+								height: '56px',
+								color: '#FFF',
+								backgroundColor: '#E44848',
+								borderRadius: '200px',
+							}}
+							// onClick={apply}
+						>
+							Show More
+						</Button>
+					</Grid>
+				</Box>
+			</Box>
+		</Box>
+	);
 }
