@@ -77,33 +77,31 @@ export default function Catalog() {
 				)}
 				{status === 'failed' && <p style={{ color: 'crimson' }}>Failed to load campers.</p>}
 				{hasMore && (
-					<div style={{ marginTop: 12 }}>
-						<button onClick={loadMore}>Load More</button>
-					</div>
+					<Box
+						sx={{
+							width: '145px',
+							height: '56px',
+							marginLeft: '336px',
+							marginTop: '40px',
+							padding: 0,
+						}}>
+						<Button
+							sx={{
+								width: '145px',
+								height: '56px',
+								borderRadius: '200px',
+								fontSize: '16px',
+								lineHeight: 1.5,
+								color: '#101828',
+								border: '1px solid #DADDE1',
+							}}
+							onClick={loadMore}>
+							Load More
+						</Button>
+						{/* <button onClick={loadMore}>Load More</button> */}
+					</Box>
 				)}
 			</div>
-			<Box
-				sx={{
-					width: '145px',
-					height: '56px',
-					marginLeft: '766px',
-					marginTop: 0,
-					padding: 0,
-				}}>
-				<Button
-					sx={{
-						width: '145px',
-						height: '56px',
-						borderRadius: '200px',
-						fontSize: '16px',
-						lineHeight: 1.5,
-						color: '#101828',
-						border: '1px solid #DADDE1',
-					}}
-					onClick={loadMore}>
-					Load More
-				</Button>
-			</Box>
 			<Outlet />
 		</Box>
 	);
