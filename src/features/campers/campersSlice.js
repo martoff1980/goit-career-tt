@@ -5,6 +5,7 @@ import { fetchCampers } from '../../api/campersApi';
 
 export const loadCampers = createAsyncThunk('campers/load', async (_, { getState }) => {
 	const { filters, campers } = getState();
+	console.log('filters:', filters, 'campers:', campers.limit);
 	const data = await fetchCampers({
 		location: filters.location || undefined,
 		form: filters.form || undefined,
@@ -12,12 +13,20 @@ export const loadCampers = createAsyncThunk('campers/load', async (_, { getState
 		page: campers.page,
 		limit: campers.limit,
 	});
+	console.log('fetched campers:', data);
 	return data;
 });
 
 const campersSlice = createSlice({
 	name: 'campers',
-	initialState: { items: [], page: 1, limit: 8, hasMore: true, status: 'idle', error: null },
+	initialState: {
+		items: [],
+		page: 1,
+		limit: 4, //8
+		hasMore: true,
+		status: 'idle',
+		error: null,
+	},
 	reducers: {
 		resetList(state) {
 			state.items = [];
@@ -28,6 +37,9 @@ const campersSlice = createSlice({
 		},
 		nextPage(state) {
 			state.page += 1;
+		},
+		setLimit: (state, action) => {
+			state.limit = action.payload;
 		},
 	},
 	extraReducers: (b) => {
@@ -46,5 +58,5 @@ const campersSlice = createSlice({
 		});
 	},
 });
-export const { resetList, nextPage } = campersSlice.actions;
+export const { resetList, nextPage, setLimit } = campersSlice.actions;
 export default campersSlice.reducer;
