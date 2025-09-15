@@ -6,6 +6,7 @@ import { Button, Box, useTheme, OutlinedInput, InputAdornment, Grid } from '@mui
 import MapIcon from '@mui/icons-material/Map';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetList, loadCampers } from '../features/campers/campersSlice';
+import { setLocation, setForm, toggleFeature } from '../features/filters/filtersSlice';
 import VehicleEquipment from './VehicleEquipment';
 import VehicleType from './VehicleType';
 
@@ -55,6 +56,7 @@ export default function CamperFilters() {
 						}}
 						placeholder="Kyiv, Ukraine"
 						startAdornment={<InputAdornment position="start">{<MapIcon fontSize="small" />}</InputAdornment>}
+						onChange={(e) => dispatch(setLocation(e.target.value))}
 					/>
 				</Box>
 				<Box className="Filters-Box" sx={{ paddingTop: '40px' }}>

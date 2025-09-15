@@ -7,37 +7,49 @@ import { Button, Box, useTheme, OutlinedInput, InputAdornment, List, Grid } from
 import CamperCard from '../components/CamperCard';
 import CamperFilters from '../components/CamperFilters';
 import Loader from '../components/Loader';
-import { loadCampers, nextPage, setLimit } from '../features/campers/campersSlice';
+import { loadCampers, nextPage, resetList, setLimit } from '../features/campers/campersSlice';
+import { use } from 'react';
 
 export default function Catalog() {
 	const dispatch = useDispatch();
-	const { items, status, hasMore } = useSelector((s) => s.campers);
-	console.log('Catalog items', items);
+	const { items, limit, status, hasMore } = useSelector((s) => s.campers);
+	const [newLimit, setNewLimit] = useState(limit);
 
-	useEffect(() => {
-		if (status === 'idle') dispatch(loadCampers());
-	}, [status, dispatch]);
+	const [currentPage, setCurrentPage] = useState(1);
+	const totalPages = Math.ceil(items.length / limit);
+
+	const startIndex = (currentPage - 1) * limit;
+	const endIndex = startIndex + limit;
+	const visibleItems = items.slice(startIndex, endIndex);
+
+	useEffect(
+		() => {
+			setLimit(newLimit);
+			if (status === 'idle') dispatch(loadCampers());
+		},
+		[status, dispatch],
+		limit
+	);
 
 	const loadMore = () => {
 		startTransition(() => {
+			setCurrentPage(currentPage + 1);
 			dispatch(nextPage());
 			dispatch(loadCampers());
 		});
 	};
 
-	const changeLimit = (e) => {
-		const limit = useSelector((state) => state.campers.limit);
-		console.log('Catalog default limit', limit);
+	const changeLimit = (newLimit) => {
+		const numericLimit = Number(newLimit);
+		dispatch(setLimit(numericLimit));
+	};
 
-		// змінна для зберігання нового значення ліміту
-		const [newLimit, setNewLimit] = useState(e.target.value);
-		console.log('Catalog new limit', newLimit);
-
-		useEffect(() => {
-			dispatch(setLimit(newLimit));
-			dispatch(loadCampers());
-		}, [limit, dispatch]);
-		console.log('Catalog new value limit', limit);
+	const handleInputChange = (e) => {
+		const value = e.target.value;
+		console.log('value:', value);
+		if (value === '' || /^[0-9]+$/.test(value)) {
+			setNewLimit(value);
+		}
 	};
 
 	return (
@@ -68,7 +80,7 @@ export default function Catalog() {
 								marginTop: '48px',
 								padding: '0',
 							}}>
-							{items.map((c, i) => (
+							{items.slice(startIndex, endIndex).map((c, i) => (
 								// повторний рендеринг - виправити
 								<CamperCard key={`${c.id}-${i}`} camper={c} />
 							))}
@@ -98,10 +110,13 @@ export default function Catalog() {
 							onClick={loadMore}>
 							Load More
 						</Button>
-						{/* <button onClick={loadMore}>Load More</button> */}
 					</Box>
 				)}
 			</div>
+			<Box className="Service-Box" hidden>
+				<input type="text" value={newLimit} onChange={handleInputChange} placeholder="Input integer" />
+				<button onClick={() => changeLimit(newLimit)}>changeLimit</button>
+			</Box>
 			<Outlet />
 		</Box>
 	);

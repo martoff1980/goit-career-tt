@@ -1,9 +1,10 @@
 /** @format */
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { Button, Box, useTheme, OutlinedInput, InputAdornment, Grid, SvgIcon } from '@mui/material';
 import Typography from '@mui/material/Typography';
-
+import { setLocation, setForm, toggleFeature } from '../features/filters/filtersSlice';
 import windIcon from '../img/icons/wind.svg?import';
 import diagramIcon from '../img/icons/diagram.svg?import';
 import showerIcon from '../img/icons/ph_shower.svg?import';
@@ -12,16 +13,28 @@ import tvIcon from '../img/icons/tv.svg?import';
 
 export default function VehicleEquipment() {
 	const items = [
-		{ label: 'AC', icon: <img src={windIcon} alt="Wind" width={32} height={32} /> },
-		{ label: 'Automatic', icon: <img src={diagramIcon} alt="Automatic" width={32} height={32} /> },
-		{ label: 'Kitchen', icon: <img src={cuphotIcon} alt="Cup-hot" width={32} height={32} /> },
-		{ label: 'TV', icon: <img src={tvIcon} alt="TV" width={32} height={32} /> },
-		{ label: 'Bathroom', icon: <img src={showerIcon} alt="Shower" width={32} height={32} /> },
+		{ label: 'AC', alt: 'AC', icon: <img src={windIcon} alt="Wind" width={32} height={32} /> },
+		{ label: 'Automatic', alt: 'automatic', icon: <img src={diagramIcon} alt="Automatic" width={32} height={32} /> },
+		{ label: 'Kitchen', alt: 'kitchen', icon: <img src={cuphotIcon} alt="Cup-hot" width={32} height={32} /> },
+		{ label: 'TV', alt: 'TV', icon: <img src={tvIcon} alt="TV" width={32} height={32} /> },
+		{ label: 'Bathroom', alt: 'bathroom', icon: <img src={showerIcon} alt="Shower" width={32} height={32} /> },
 	];
 
 	const [selected, setSelected] = useState([]);
+	const dispatch = useDispatch();
 	const handleToggle = (label) => {
-		setSelected((prev) => (prev.includes(label) ? prev.filter((item) => item !== label) : [...prev, label]));
+		setSelected((prev) => {
+			let newSelected;
+
+			if (prev.includes(label)) {
+				newSelected = prev.filter((item) => item !== label);
+			} else {
+				newSelected = [...prev, label];
+			}
+
+			dispatch(toggleFeature(label));
+			return newSelected;
+		});
 	};
 
 	return (
@@ -41,13 +54,13 @@ export default function VehicleEquipment() {
 				<hr style={{ marginTop: '16px', border: '1px solid #DADDE1' }} />
 				<Grid container spacing={'10px'} sx={{ marginTop: '30px' }}>
 					{items.map((item, index) => {
-						const isActive = selected.includes(item.label);
+						const isActive = selected.includes(item.alt);
 						return (
 							<Button
 								variant="outlined"
 								key={index}
 								item={item}
-								onClick={() => handleToggle(item.label)}
+								onClick={() => handleToggle(item.alt)}
 								sx={{
 									display: 'flex',
 									alignItems: 'center',

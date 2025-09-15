@@ -9,6 +9,7 @@ import Loader from './components/Loader';
 const Home = lazy(() => import('./pages/Home'));
 const Catalog = lazy(() => import('./pages/Catalog'));
 const CamperDetails = lazy(() => import('./pages/CamperDetails'));
+const TestDetails = lazy(() => import('./components/TestDetails'));
 
 export default function App() {
 	return (
@@ -18,7 +19,8 @@ export default function App() {
 					<Route index element={<Home />} />
 					<Route path="catalog">
 						<Route index element={<Catalog />} />
-						<Route path=":id" element={<CamperDetails />} />
+						<Route path=":id" element={<TestDetails />} />
+						{/* <Route path=":id" element={<CamperDetails />} /> */}
 					</Route>
 				</Route>
 			</Routes>

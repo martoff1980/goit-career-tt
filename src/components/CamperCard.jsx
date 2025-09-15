@@ -2,6 +2,7 @@
 
 // src/components/UntitledSvg.jsx
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box, Grid, Typography, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { Padding } from '@mui/icons-material';
@@ -9,6 +10,7 @@ import MapIcon from '@mui/icons-material/Map';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 export default function CamperCard({ camper }) {
+	const navigate = useNavigate();
 	const favorites = useSelector((s) => s.favorites);
 	const dispatch = useDispatch();
 	const isFav = favorites.includes(camper.id);
@@ -157,7 +159,8 @@ export default function CamperCard({ camper }) {
 								color: '#FFF',
 								backgroundColor: '#E44848',
 								borderRadius: '200px',
-							}}>
+							}}
+							onClick={() => navigate(`/catalog/${camper.id}`)}>
 							Show More
 						</Button>
 					</Grid>

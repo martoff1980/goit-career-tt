@@ -41,7 +41,7 @@ export default function Banner() {
 						</h1>
 						<h2
 							style={{
-								letterSpacing: '9.5px',
+								// letterSpacing: '9.5px',
 								fontweight: '600',
 								fontSize: '24px',
 								fontStyle: 'Semibold',

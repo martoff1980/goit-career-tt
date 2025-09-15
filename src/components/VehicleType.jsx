@@ -11,9 +11,9 @@ import alcoveIcon from '../img/icons/bi_grid-3x3-gap.svg?import';
 
 export default function VehicleType() {
 	const items = [
-		{ label: 'Van', icon: <img src={vanIcon} alt="Van" width={32} height={32} /> },
-		{ label: 'Fully Integrated', icon: <img src={integratedIcon} alt="Fully Integrated" width={32} height={32} /> },
-		{ label: 'Alcove', icon: <img src={alcoveIcon} alt="Alcove" width={32} height={32} /> },
+		{ label: 'Van', alt: 'panelTruck', icon: <img src={vanIcon} alt="Van" width={32} height={32} /> },
+		{ label: 'Fully Integrated', alt: 'fullyIntegrated', icon: <img src={integratedIcon} alt="Fully Integrated" width={32} height={32} /> },
+		{ label: 'Alcove', alt: 'alcove', icon: <img src={alcoveIcon} alt="Alcove" width={32} height={32} /> },
 	];
 
 	const [selected, setSelected] = useState([]);

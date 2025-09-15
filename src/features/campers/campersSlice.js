@@ -3,6 +3,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchCampers } from '../../api/campersApi';
 
+const savedLimit = localStorage.getItem('limit');
 export const loadCampers = createAsyncThunk('campers/load', async (_, { getState }) => {
 	const { filters, campers } = getState();
 	console.log('filters:', filters, 'campers:', campers.limit);
@@ -13,7 +14,7 @@ export const loadCampers = createAsyncThunk('campers/load', async (_, { getState
 		page: campers.page,
 		limit: campers.limit,
 	});
-	console.log('fetched campers:', data);
+	// console.log('fetched campers:', data);
 	return data;
 });
 
@@ -22,7 +23,7 @@ const campersSlice = createSlice({
 	initialState: {
 		items: [],
 		page: 1,
-		limit: 4, //8
+		limit: savedLimit ? Number(savedLimit) : 4, //дефолтне значення
 		hasMore: true,
 		status: 'idle',
 		error: null,
@@ -40,6 +41,7 @@ const campersSlice = createSlice({
 		},
 		setLimit: (state, action) => {
 			state.limit = action.payload;
+			localStorage.setItem('limit', String(action.payload));
 		},
 	},
 	extraReducers: (b) => {
