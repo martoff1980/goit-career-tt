@@ -7,34 +7,42 @@ import { Button, Box, useTheme, OutlinedInput, InputAdornment, List, Grid } from
 import CamperCard from '../components/CamperCard';
 import CamperFilters from '../components/CamperFilters';
 import Loader from '../components/Loader';
-import { loadCampers, nextPage, resetList, setLimit } from '../features/campers/campersSlice';
-import { use } from 'react';
+import { loadCampers, backPage, nextPage, resetList, setLimit } from '../features/campers/campersSlice';
 
 export default function Catalog() {
 	const dispatch = useDispatch();
-	const { items, limit, status, hasMore } = useSelector((s) => s.campers);
+	const { items, totalCount: totalCampers, limit, status, hasMore } = useSelector((s) => s.campers);
 	const [newLimit, setNewLimit] = useState(limit);
-
-	const [currentPage, setCurrentPage] = useState(1);
-	const totalPages = Math.ceil(items.length / limit);
-
-	const startIndex = (currentPage - 1) * limit;
-	const endIndex = startIndex + limit;
-	const visibleItems = items.slice(startIndex, endIndex);
 
 	useEffect(
 		() => {
 			setLimit(newLimit);
+
 			if (status === 'idle') dispatch(loadCampers());
 		},
 		[status, dispatch],
 		limit
 	);
 
+	const [currentPage, setCurrentPage] = useState(1);
+	const totalPages = Math.ceil(totalCampers / limit);
+
+	const startIndex = (currentPage - 1) * limit;
+	const endIndex = startIndex + limit;
+	// const visibleItems = items.slice(startIndex, endIndex);
+
 	const loadMore = () => {
 		startTransition(() => {
 			setCurrentPage(currentPage + 1);
 			dispatch(nextPage());
+			dispatch(loadCampers());
+		});
+	};
+
+	const loadBack = () => {
+		startTransition(() => {
+			setCurrentPage(1);
+			dispatch(backPage());
 			dispatch(loadCampers());
 		});
 	};
@@ -46,7 +54,6 @@ export default function Catalog() {
 
 	const handleInputChange = (e) => {
 		const value = e.target.value;
-		console.log('value:', value);
 		if (value === '' || /^[0-9]+$/.test(value)) {
 			setNewLimit(value);
 		}
@@ -96,6 +103,32 @@ export default function Catalog() {
 							marginLeft: '336px',
 							marginTop: '40px',
 							padding: 0,
+						}}
+						hidden={currentPage === totalPages}>
+						<Button
+							sx={{
+								width: '145px',
+								height: '56px',
+								borderRadius: '200px',
+								fontSize: '16px',
+								lineHeight: 1.5,
+								color: '#101828',
+								border: '1px solid #DADDE1',
+							}}
+							onClick={loadMore}
+							disabled={currentPage === totalPages || status === 'failed'}>
+							Load More
+						</Button>
+					</Box>
+				)}
+				{hasMore && currentPage === totalPages && (
+					<Box
+						sx={{
+							width: '145px',
+							height: '56px',
+							marginLeft: '336px',
+							marginTop: '40px',
+							padding: 0,
 						}}>
 						<Button
 							sx={{
@@ -107,8 +140,9 @@ export default function Catalog() {
 								color: '#101828',
 								border: '1px solid #DADDE1',
 							}}
-							onClick={loadMore}>
-							Load More
+							onClick={loadBack}
+							disabled={currentPage === 1}>
+							Back
 						</Button>
 					</Box>
 				)}

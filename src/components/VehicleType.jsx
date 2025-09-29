@@ -1,10 +1,11 @@
 /** @format */
 
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { Button, Box, useTheme, OutlinedInput, InputAdornment, Grid, SvgIcon } from '@mui/material';
 import Typography from '@mui/material/Typography';
-
+import { setLocation, setForm, toggleFeature } from '../features/filters/filtersSlice';
 import vanIcon from '../img/icons/bi_grid-1x2.svg?import';
 import integratedIcon from '../img/icons/bi_grid-2x2.svg?import';
 import alcoveIcon from '../img/icons/bi_grid-3x3-gap.svg?import';
@@ -16,9 +17,14 @@ export default function VehicleType() {
 		{ label: 'Alcove', alt: 'alcove', icon: <img src={alcoveIcon} alt="Alcove" width={32} height={32} /> },
 	];
 
-	const [selected, setSelected] = useState([]);
+	const [selected, setSelected] = useState(null);
+	const dispatch = useDispatch();
+
 	const handleToggle = (label) => {
-		setSelected((prev) => (prev.includes(label) ? prev.filter((item) => item !== label) : [...prev, label]));
+		// setSelected((prev) => (prev.includes(label) ? prev.filter((item) => item !== label) : [...prev, label]));
+		setSelected((prev) => (prev === label ? null : label));
+		const action = label !== null && selected === null ? setForm(label) : label === selected ? setForm(null) : setForm(label);
+		dispatch(action);
 	};
 
 	return (
@@ -43,13 +49,14 @@ export default function VehicleType() {
 				<hr style={{ marginTop: '16px', border: '1px solid #DADDE1' }} />
 				<Grid container spacing={'10px'} sx={{ marginTop: '30px' }}>
 					{items.map((item, index) => {
-						const isActive = selected.includes(item.label);
+						// const isActive = selected.includes(item.label);
+						const isActive = selected === item.alt;
 						return (
 							<Button
 								variant="outlined"
 								key={index}
 								item={item}
-								onClick={() => handleToggle(item.label)}
+								onClick={() => handleToggle(item.alt)}
 								sx={{
 									display: 'flex',
 									alignItems: 'center',
