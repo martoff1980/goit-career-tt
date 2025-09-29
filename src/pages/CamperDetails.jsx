@@ -12,6 +12,13 @@ const Gallery = React.lazy(() => import('../components/Gallery'));
 const TabsPanel = React.lazy(() => import('../components/TabsPanel'));
 const Loader = React.lazy(() => import('../components/Loader'));
 
+const stylesDetails = {
+	mt: '48px',
+	ml: '64px',
+	mb: '80px',
+	width: '1312px',
+	border: '1px solid red',
+};
 export default function TestDetails() {
 	const dispatch = useDispatch();
 	const { id } = useParams();
@@ -33,15 +40,7 @@ export default function TestDetails() {
 	if (!camper) return <Typography>No camper found</Typography>;
 
 	return (
-		<Box
-			className="Card-Details"
-			sx={{
-				mt: '48px',
-				ml: '64px',
-				mb: '80px',
-				width: '1312px',
-				border: '1px solid red',
-			}}>
+		<Box className="Card-Details" sx={stylesDetails}>
 			<Grid container>
 				<Grid
 					className="Card-Title"
