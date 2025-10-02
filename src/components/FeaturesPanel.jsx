@@ -3,6 +3,7 @@ import React, { useState, useEffect, useMemo, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Grid, Typography } from '@mui/material';
+import { colors } from '../styles/GlobalStyle';
 
 import CamperSpecsList from './CamperSpecsList';
 import VehicleDetails from './VehicleDetails';
@@ -52,7 +53,7 @@ export default function FeaturesPanel() {
 				sx={{
 					width: '631px',
 					height: '588px',
-					bgcolor: '#F7F7F7',
+					bgcolor: `${colors.inputs}`,
 					borderRadius: '10px',
 				}}>
 				<Grid
@@ -71,7 +72,7 @@ export default function FeaturesPanel() {
 				sx={{
 					width: '641px',
 					// height: '588px',
-					border: '1px solid #DADDE1',
+					border: `1px solid${colors.grey_light}`,
 					borderRadius: '10px',
 				}}>
 				<Suspense fallback={<div>Loading form...</div>}>

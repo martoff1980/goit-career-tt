@@ -1,73 +1,71 @@
 /** @format */
-import { Button, Box, useTheme } from '@mui/material';
+import { Button, Box, Typography, useTheme } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import bgImage from '../img/hero.jpg';
+import { colors } from '../styles/GlobalStyle';
 
+const styleHeroSection = {
+	ml: '60px',
+	p: '256px 0 256px 0',
+	width: '571px',
+};
+
+const getStyleBanner = (Image) => {
+	return {
+		m: 0,
+		p: 0,
+		minWidth: '1440px',
+		minHeight: '696px',
+		backgroundImage: `url(${Image})`,
+		backgroundRepeat: 'no-repeat',
+		backgroundSize: 'cover',
+		backgroundPosition: 'center',
+		color: `${colors.inputs}`,
+	};
+};
+
+const styleHeroTitle = {
+	fontSize: '48px',
+	fontWeight: 600,
+	letterSpacing: '0.2px',
+	lineHeight: 0.67,
+};
+
+const styleHeroTitle2 = {
+	mt: 2,
+	width: '96.3%',
+	fontSize: '24px',
+	fontWeight: 600,
+	letterSpacing: '0.2px',
+	lineHeight: 1.33,
+};
+
+const styleButtonViewNow = {
+	mt: '40px',
+	height: '56px',
+	width: '173px',
+	fontweight: '500',
+	fontSize: '16px',
+	lineHeight: 1.5,
+	textAlign: 'center',
+	borderRadius: '200px',
+	color: `${colors.white}`,
+	backgroundColor: `${colors.button}`,
+};
 export default function Banner() {
 	const nav = useNavigate();
 	return (
 		<>
-			<Box
-				className="Bunner"
-				style={{
-					margin: '0 0 0 0',
-					padding: '0 0 0 0',
-					minWidth: '1440px',
-					minHeight: '696px',
-					backgroundImage: `url(${bgImage})`,
-					backgroundRepeat: 'no-repeat',
-					backgroundSize: 'cover',
-					backgroundPosition: 'center',
-				}}>
-				<Box
-					className="Hero-Section"
-					style={{
-						marginLeft: '60px',
-						padding: '256px 0 256px 0',
-						width: '571px',
-					}}>
+			<Box className="Bunner" sx={getStyleBanner(bgImage)}>
+				<Box className="Hero-Section" sx={styleHeroSection}>
 					<Box className="Hero-Title">
-						<h1
-							style={{
-								fontWeight: '600',
-								fontSize: '32px',
-								fontStyle: 'Semibold',
-								letterSpacing: '9.5px',
-								lineHeight: '1.00',
-								textAlign: 'start',
-								color: '#F7F7F7',
-							}}>
+						<Typography variant="h1" sx={styleHeroTitle}>
 							Campers of your dreams
-						</h1>
-						<h2
-							style={{
-								// letterSpacing: '9.5px',
-								fontweight: '600',
-								fontSize: '24px',
-								fontStyle: 'Semibold',
-								lineHeight: '1.00',
-								paragraphSpacing: '20px',
-								textAlign: 'start',
-								letterSpacing: '0.17px',
-								color: '#F7F7F7',
-							}}>
+						</Typography>
+						<Typography variant="h2" sx={styleHeroTitle2}>
 							You can find everything you want in our catalog
-						</h2>
-						<Button
-							style={{
-								margin: '16px 0 16px 0',
-								padding: '16px 24px',
-								height: '48px',
-								width: '173px',
-								fontweight: '500',
-								fontSize: '16px',
-								lineHeight: '1.50',
-								textAlign: 'center',
-								borderRadius: '200px',
-								color: '#FFFFFF',
-								backgroundColor: '#E44848',
-							}}
-							onClick={() => nav('/catalog')}>
+						</Typography>
+						<Button sx={styleButtonViewNow} onClick={() => nav('/catalog')}>
 							View Now
 						</Button>
 					</Box>

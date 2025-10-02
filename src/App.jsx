@@ -8,7 +8,6 @@ import Loader from './components/Loader';
 
 const Home = lazy(() => import('./pages/Home'));
 const Catalog = lazy(() => import('./pages/Catalog'));
-// const CamperDetailsOld = lazy(() => import('./pages/CamperDetails_old'));
 const CamperDetails = lazy(() => import('./pages/CamperDetails'));
 
 export default function App() {
@@ -20,7 +19,6 @@ export default function App() {
 					<Route path="catalog">
 						<Route index element={<Catalog />} />
 						<Route path=":id" element={<CamperDetails />} />
-						{/* <Route path=":id" element={<CamperDetailsOld />} /> */}
 					</Route>
 				</Route>
 			</Routes>

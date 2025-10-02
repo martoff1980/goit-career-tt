@@ -10,7 +10,33 @@ import diagramIcon from '../img/icons/diagram.svg?import';
 import showerIcon from '../img/icons/ph_shower.svg?import';
 import cuphotIcon from '../img/icons/cup-hot.svg?import';
 import tvIcon from '../img/icons/tv.svg?import';
+import { colors } from '../styles/GlobalStyle';
 
+const styleVehicleEqBox = {
+	width: '181px',
+	fontSize: '20px',
+	fontWeight: '600',
+	fontStyle: 'normal',
+	lineHeight: 1.2,
+};
+
+const getStyleVehicleEqButton = (isActive) => {
+	return {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+		flexDirection: 'column',
+		gap: 1,
+		border: `1px solid ${colors.grey_light}`,
+		borderColor: isActive ? `${colors.button}` : `${colors.grey_light}`,
+		'&:hover': {
+			borderColor: isActive ? `${colors.button}` : `${colors.grey_light}`,
+		},
+		borderRadius: '12px',
+		width: '112px',
+		height: '96px',
+	};
+};
 export default function VehicleEquipment() {
 	const items = [
 		{ label: 'AC', alt: 'AC', icon: <img src={windIcon} alt="Wind" width={32} height={32} /> },
@@ -40,48 +66,21 @@ export default function VehicleEquipment() {
 	return (
 		<>
 			<Box className="VehicleEquipment-Box">
-				<Typography
-					variant="h6"
-					sx={{
-						width: '181px',
-						fontSize: '20px',
-						fontWeight: '600',
-						fontStyle: 'normal',
-						lineHeight: 1.2,
-					}}>
+				<Typography variant="h6" sx={styleVehicleEqBox}>
 					Vehicle equipment
 				</Typography>
-				<hr style={{ marginTop: '16px', border: '1px solid #DADDE1' }} />
+				<hr style={{ marginTop: '16px', border: `1px solid ${colors.grey_light}` }} />
 				<Grid container spacing={'10px'} sx={{ marginTop: '30px' }}>
 					{items.map((item, index) => {
 						const isActive = selected.includes(item.alt);
 						return (
-							<Button
-								variant="outlined"
-								key={index}
-								item={item}
-								onClick={() => handleToggle(item.alt)}
-								sx={{
-									display: 'flex',
-									alignItems: 'center',
-									justifyContent: 'center',
-									flexDirection: 'column',
-									gap: 1,
-									border: '1px solid #DADDE1',
-									borderColor: isActive ? '#E44848' : '#DADDE1',
-									'&:hover': {
-										borderColor: isActive ? '#E44848' : '#DADDE1',
-									},
-									borderRadius: '12px',
-									width: '112px',
-									height: '96px',
-								}}>
+							<Button variant="outlined" key={index} item={item} onClick={() => handleToggle(item.alt)} sx={getStyleVehicleEqButton(isActive)}>
 								{item.icon}
 								<Typography
 									sx={{
 										fontSize: '16px',
 										fontWeight: 500,
-										color: ' #101828',
+										color: `${colors.main}`,
 									}}>
 									{item.label}
 								</Typography>

@@ -3,6 +3,7 @@ import React, { useState, useEffect, useMemo, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Typography } from '@mui/material';
+import { colors } from '../styles/GlobalStyle';
 
 const Email = React.lazy(() => import('./Email'));
 const Blocks = React.lazy(() => import('./ReviewBlocks'));
@@ -48,7 +49,7 @@ export default function ReviewsPanel() {
 				sx={{
 					width: '641px',
 					// height: '588px',
-					border: '1px solid #DADDE1',
+					border: `1px solid ${colors.grey_light}`,
 					borderRadius: '10px',
 				}}>
 				<Suspense fallback={<div>Loading form...</div>}>

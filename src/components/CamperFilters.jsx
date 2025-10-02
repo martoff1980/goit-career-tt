@@ -9,7 +9,28 @@ import { resetList, loadCampers } from '../features/campers/campersSlice';
 import { setLocation, setForm, toggleFeature } from '../features/filters/filtersSlice';
 import VehicleEquipment from './VehicleEquipment';
 import VehicleType from './VehicleType';
+import { colors } from '../styles/GlobalStyle';
+import { StyleOutlined } from '@mui/icons-material';
 
+const styleOutlinedInput = {
+	width: '360px',
+	height: '56px',
+	lineHeight: 1.5,
+	fontSize: '16px',
+	fontWeight: '400',
+	fontStyle: 'Regular',
+	borderRadius: '12px',
+	backgroundColor: `${colors.inputs}`,
+};
+
+const styleSearchButton = {
+	marginTop: '40px',
+	width: '166px',
+	height: '56px',
+	color: '#FFF',
+	backgroundColor: `${colors.button}`,
+	borderRadius: '200px',
+};
 export default function CamperFilters() {
 	const filters = useSelector((s) => s.filters);
 	const dispatch = useDispatch();
@@ -44,16 +65,7 @@ export default function CamperFilters() {
 						Location
 					</Box>
 					<OutlinedInput
-						sx={{
-							width: '360px',
-							height: '56px',
-							lineHeight: 1.5,
-							fontSize: '16px',
-							fontWeight: '400',
-							fontStyle: 'Regular',
-							borderRadius: '12px',
-							backgroundColor: '#F7F7F7',
-						}}
+						sx={styleOutlinedInput}
 						placeholder="Kyiv, Ukraine"
 						startAdornment={<InputAdornment position="start">{<MapIcon fontSize="small" />}</InputAdornment>}
 						onChange={(e) => dispatch(setLocation(e.target.value))}
@@ -65,7 +77,6 @@ export default function CamperFilters() {
 						sx={{
 							fontSize: '16px',
 							fontWeight: 400,
-							fontStyle: 'medium',
 							lineHeight: 1.5,
 						}}>
 						Filters
@@ -75,23 +86,13 @@ export default function CamperFilters() {
 						sx={{
 							marginTop: '32px',
 							width: '360px',
-							color: '#101828',
+							color: `${colors.main}`,
 						}}>
 						<VehicleEquipment />
 						<VehicleType />
 					</Box>
 				</Box>
-				<Button
-					className="Search-Button"
-					style={{
-						marginTop: '40px',
-						width: '166px',
-						height: '56px',
-						color: '#FFF',
-						backgroundColor: '#E44848',
-						borderRadius: '200px',
-					}}
-					onClick={apply}>
+				<Button className="Search-Button" style={styleSearchButton} onClick={apply}>
 					Search
 				</Button>
 			</Box>

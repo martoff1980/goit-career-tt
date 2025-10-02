@@ -1,19 +1,20 @@
 /** @format */
 import React from 'react';
 import { Box, Grid, Typography } from '@mui/material';
+import { colors } from '../styles/GlobalStyle';
 
 const stylesTitle = {
 	fontSize: '20px',
 	fontWeight: 600,
 	lineHeight: 1.2,
-	color: '#101828',
+	color: `${colors.main}`,
 };
 
 const stylesVechile = {
 	display: 'flex',
 	width: '100%',
-	margin: '0 0 0 0',
-	padding: '0 0 0 0',
+	m: 0,
+	p: 0,
 	flexDirection: 'row',
 	justifyContent: 'space-between',
 	fontSize: '16px',
@@ -26,7 +27,7 @@ export default function VehicleDetails({ vechils, camper }) {
 			<Typography className="vechile-title" variant="h3" sx={stylesTitle}>
 				Vehicle details
 			</Typography>
-			<hr style={{ marginTop: '16px', border: '1px solid #DADDE1' }} />
+			<hr style={{ marginTop: '16px', border: `1px solid ${colors.grey_light}` }} />
 			<Grid
 				container
 				className="Vehicle-Info"

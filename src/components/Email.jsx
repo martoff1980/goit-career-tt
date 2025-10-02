@@ -3,13 +3,14 @@
 import React from 'react';
 import { Box, Button, Grid, TextField, Typography, Stack, Paper } from '@mui/material';
 import { useFormik } from 'formik';
+import { colors } from '../styles/GlobalStyle';
 
 const inputStyles = {
 	lineHeight: 1.5,
 	fontSize: '16px',
 	fontWeight: 400,
 	borderRadius: '10px',
-	bgcolor: '#F7F7F7',
+	bgcolor: `${colors.inputs}`,
 };
 
 const heightInput = { height: '60px' };
@@ -76,7 +77,7 @@ export default function CampervanBookingForm() {
 						fontSize: '16px',
 						fontWeight: 400,
 						lineHeight: 1.5,
-						color: '#6C717B',
+						color: `${colors.grey}`,
 					}}>
 					Stay connected! We are always ready to help you.
 				</Typography>

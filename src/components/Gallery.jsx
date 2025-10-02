@@ -2,13 +2,14 @@
 
 import React from 'react';
 import { Box, List, Grid, Typography } from '@mui/material';
+import { colors } from '../styles/GlobalStyle';
 
 const getStyleImage = (thumb) => {
 	return {
 		width: '292px',
 		height: '320px',
 		borderRadius: '10px',
-		border: '1px solid #DADDE1',
+		border: `1px solid ${colors.grey_light}`,
 		backgroundImage: `url(${thumb})`,
 		backgroundSize: 'cover',
 	};

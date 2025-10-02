@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Grid } from '@mui/material';
+import { colors } from '../styles/GlobalStyle';
 
 const stylesBage = {
 	display: 'flex',
@@ -13,8 +14,8 @@ const stylesBage = {
 	fontSize: '16px',
 	lineHeight: 1.5,
 	fontWeight: 500,
-	border: '1px solid #F2F4F7',
-	backgroundColor: '#F2F4F7',
+	border: `1px solid ${colors.bages}`,
+	backgroundColor: `${colors.bages}`,
 };
 
 const formatLabel = (key) => {

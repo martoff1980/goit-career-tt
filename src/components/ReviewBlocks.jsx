@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Box, Typography, Avatar, Rating, Grid } from '@mui/material';
+import { colors } from '../styles/GlobalStyle';
 
 const styleAvatar = {
 	width: 60,
@@ -10,8 +11,8 @@ const styleAvatar = {
 	fontSize: '24px',
 	lineHeight: 1.33,
 	textTransform: 'uppercase',
-	color: '#E44848',
-	bgcolor: '#F2F4F7',
+	color: `${colors.button}`,
+	bgcolor: `${colors.bages}`,
 };
 
 const stylePerson = {
@@ -20,7 +21,7 @@ const stylePerson = {
 	fontWeight: 500,
 	fontSize: '16px',
 	lineHeight: 1.5,
-	color: '#101828',
+	color: `${colors.main}`,
 };
 
 const styleComment = {
@@ -30,7 +31,7 @@ const styleComment = {
 	fontWeight: 400,
 	fontSize: '16px',
 	lineHeight: 1.5,
-	color: '#475467',
+	color: `${colors.text}`,
 };
 
 function Review({ name, rating, comment }) {
