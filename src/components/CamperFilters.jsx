@@ -9,7 +9,7 @@ import { resetList, loadCampers } from '../features/campers/campersSlice';
 import { setLocation, setForm, toggleFeature } from '../features/filters/filtersSlice';
 import VehicleEquipment from './VehicleEquipment';
 import VehicleType from './VehicleType';
-import { colors } from '../styles/GlobalStyle';
+import { colors, styleRedButton } from '../styles/GlobalStyle';
 import { StyleOutlined } from '@mui/icons-material';
 
 const styleOutlinedInput = {
@@ -18,7 +18,6 @@ const styleOutlinedInput = {
 	lineHeight: 1.5,
 	fontSize: '16px',
 	fontWeight: '400',
-	fontStyle: 'Regular',
 	borderRadius: '12px',
 	backgroundColor: `${colors.inputs}`,
 };
@@ -27,9 +26,7 @@ const styleSearchButton = {
 	marginTop: '40px',
 	width: '166px',
 	height: '56px',
-	color: '#FFF',
-	backgroundColor: `${colors.button}`,
-	borderRadius: '200px',
+	...styleRedButton,
 };
 export default function CamperFilters() {
 	const filters = useSelector((s) => s.filters);
@@ -92,7 +89,7 @@ export default function CamperFilters() {
 						<VehicleType />
 					</Box>
 				</Box>
-				<Button className="Search-Button" style={styleSearchButton} onClick={apply}>
+				<Button className="Search-Button" sx={styleSearchButton} onClick={apply}>
 					Search
 				</Button>
 			</Box>

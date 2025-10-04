@@ -10,14 +10,11 @@ import diagramIcon from '../img/icons/diagram.svg?import';
 import showerIcon from '../img/icons/ph_shower.svg?import';
 import cuphotIcon from '../img/icons/cup-hot.svg?import';
 import tvIcon from '../img/icons/tv.svg?import';
-import { colors } from '../styles/GlobalStyle';
+import { colors, styleH3 } from '../styles/GlobalStyle';
 
 const styleVehicleEqBox = {
 	width: '181px',
-	fontSize: '20px',
-	fontWeight: '600',
-	fontStyle: 'normal',
-	lineHeight: 1.2,
+	...styleH3,
 };
 
 const getStyleVehicleEqButton = (isActive) => {

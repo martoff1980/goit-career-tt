@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect, startTransition } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Button, Box, useTheme, OutlinedInput, InputAdornment, List, Grid } from '@mui/material';
-import { colors } from '../styles/GlobalStyle';
+import { colors, styleGreyButton } from '../styles/GlobalStyle';
 
 import CamperCard from '../components/CamperCard';
 import CamperFilters from '../components/CamperFilters';
@@ -32,29 +32,13 @@ const styleCatalogList = {
 const styleButtonLoadMore = {
 	width: '145px',
 	height: '56px',
-	borderRadius: '200px',
-	fontSize: '16px',
-	lineHeight: 1.5,
-	color: '#101828',
-	border: `1px solid ${colors.grey_light}`,
-	textTransform: 'capitalize',
-	'&:hover': {
-		borderColor: `${colors.button_hover}`,
-	},
+	...styleGreyButton,
 };
 
 const styleButtonBack = {
 	width: '145px',
 	height: '56px',
-	borderRadius: '200px',
-	fontSize: '16px',
-	lineHeight: 1.5,
-	color: '#101828',
-	border: '1px solid #DADDE1',
-	textTransform: 'capitalize',
-	'&:hover': {
-		borderColor: `${colors.button_hover}`,
-	},
+	...styleGreyButton,
 };
 
 const styleButtonBackBox = {

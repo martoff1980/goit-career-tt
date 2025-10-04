@@ -2,14 +2,12 @@
 
 import React, { useState } from 'react';
 import { Box, Typography, Avatar, Rating, Grid } from '@mui/material';
-import { colors } from '../styles/GlobalStyle';
+import { colors, styleBody2, styleH2, styleMediumBody2 } from '../styles/GlobalStyle';
 
 const styleAvatar = {
 	width: 60,
 	height: 60,
-	fontWeight: 600,
-	fontSize: '24px',
-	lineHeight: 1.33,
+	...styleH2,
 	textTransform: 'uppercase',
 	color: `${colors.button}`,
 	bgcolor: `${colors.bages}`,
@@ -18,9 +16,7 @@ const styleAvatar = {
 const stylePerson = {
 	m: 0,
 	p: 0,
-	fontWeight: 500,
-	fontSize: '16px',
-	lineHeight: 1.5,
+	...styleMediumBody2,
 	color: `${colors.main}`,
 };
 
@@ -28,9 +24,7 @@ const styleComment = {
 	m: 0,
 	pb: 0,
 	height: '72px',
-	fontWeight: 400,
-	fontSize: '16px',
-	lineHeight: 1.5,
+	...styleBody2,
 	color: `${colors.text}`,
 };
 

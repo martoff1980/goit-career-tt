@@ -2,7 +2,7 @@
 import { Button, Box, Typography, useTheme } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import bgImage from '../img/hero.jpg';
-import { colors } from '../styles/GlobalStyle';
+import { colors, styleH1, styleH2, styleRedButton } from '../styles/GlobalStyle';
 
 const styleHeroSection = {
 	ml: '60px',
@@ -25,32 +25,22 @@ const getStyleBanner = (Image) => {
 };
 
 const styleHeroTitle = {
-	fontSize: '48px',
-	fontWeight: 600,
+	...styleH1,
 	letterSpacing: '0.2px',
-	lineHeight: 0.67,
 };
 
 const styleHeroTitle2 = {
 	mt: 2,
 	width: '96.3%',
-	fontSize: '24px',
-	fontWeight: 600,
+	...styleH2,
 	letterSpacing: '0.2px',
-	lineHeight: 1.33,
 };
 
 const styleButtonViewNow = {
 	mt: '40px',
 	height: '56px',
 	width: '173px',
-	fontweight: '500',
-	fontSize: '16px',
-	lineHeight: 1.5,
-	textAlign: 'center',
-	borderRadius: '200px',
-	color: `${colors.white}`,
-	backgroundColor: `${colors.button}`,
+	...styleRedButton,
 };
 export default function Banner() {
 	const nav = useNavigate();

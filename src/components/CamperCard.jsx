@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Box, Grid, Typography, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { colors } from '../styles/GlobalStyle';
+import { colors, styleRedButton } from '../styles/GlobalStyle';
 
 const Title = React.lazy(() => import('./CamperTitle'));
 const CamperSpecs = React.lazy(() => import('./CamperSpecsList'));
@@ -45,9 +45,7 @@ const stylesSpecs = {
 const styleButtonShowMore = {
 	width: '166px',
 	height: '56px',
-	color: `${colors.white}`,
-	backgroundColor: `${colors.button}`,
-	borderRadius: '200px',
+	...styleRedButton,
 };
 export default function CamperCard({ camper }) {
 	const navigate = useNavigate();
@@ -57,12 +55,6 @@ export default function CamperCard({ camper }) {
 
 	// Перелік характеристик, які потрібно відобразити
 	const specs = ['transmission', 'engine', 'AC', 'bathroom', 'kitchen', 'TV', 'radio', 'refrigerator', 'microwave', 'gas', 'water'];
-
-	const formatLabel = (key) => {
-		if (!key) return key;
-		if (key.length <= 3) return key.toUpperCase();
-		return key.charAt(0).toUpperCase() + key.slice(1);
-	};
 
 	return (
 		<Box className="Camper-Card" sx={styleCard}>
@@ -107,7 +99,7 @@ export default function CamperCard({ camper }) {
 						</Grid>
 					</Grid>
 					<Grid sx={{ mt: 'auto' }}>
-						<Button className="ShowMore-Button" style={styleButtonShowMore} onClick={() => navigate(`/catalog/${camper.id}`)}>
+						<Button className="ShowMore-Button" sx={styleButtonShowMore} onClick={() => navigate(`/catalog/${camper.id}`)}>
 							Show More
 						</Button>
 					</Grid>

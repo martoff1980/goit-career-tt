@@ -9,7 +9,7 @@ import { setLocation, setForm, toggleFeature } from '../features/filters/filters
 import vanIcon from '../img/icons/bi_grid-1x2.svg?import';
 import integratedIcon from '../img/icons/bi_grid-2x2.svg?import';
 import alcoveIcon from '../img/icons/bi_grid-3x3-gap.svg?import';
-import { colors } from '../styles/GlobalStyle';
+import { colors, styleH3, styleButton } from '../styles/GlobalStyle';
 
 const getStyleVehicleTypeButton = (isActive) => {
 	return {
@@ -30,10 +30,7 @@ const getStyleVehicleTypeButton = (isActive) => {
 
 const styleVehicleType = {
 	width: '120px',
-	fontSize: '20px',
-	fontWeight: '600',
-	fontStyle: 'normal',
-	lineHeight: 1.2,
+	...styleH3,
 };
 export default function VehicleType() {
 	const items = [
@@ -73,8 +70,7 @@ export default function VehicleType() {
 								{item.icon}
 								<Typography
 									sx={{
-										fontSize: '16px',
-										fontWeight: 500,
+										...styleButton,
 										color: `${colors.main}`,
 									}}>
 									{item.label}

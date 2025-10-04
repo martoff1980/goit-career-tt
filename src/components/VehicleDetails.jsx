@@ -1,12 +1,10 @@
 /** @format */
 import React from 'react';
 import { Box, Grid, Typography } from '@mui/material';
-import { colors } from '../styles/GlobalStyle';
+import { colors, styleButton, styleH3 } from '../styles/GlobalStyle';
 
 const stylesTitle = {
-	fontSize: '20px',
-	fontWeight: 600,
-	lineHeight: 1.2,
+	...styleH3,
 	color: `${colors.main}`,
 };
 
@@ -17,9 +15,7 @@ const stylesVechile = {
 	p: 0,
 	flexDirection: 'row',
 	justifyContent: 'space-between',
-	fontSize: '16px',
-	fontWeight: 500,
-	lineHeight: 1.5,
+	...styleButton,
 };
 export default function VehicleDetails({ vechils, camper }) {
 	return (

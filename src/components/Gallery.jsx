@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Box, List, Grid, Typography } from '@mui/material';
-import { colors } from '../styles/GlobalStyle';
+import { colors, styleBody2 } from '../styles/GlobalStyle';
 
 const getStyleImage = (thumb) => {
 	return {
@@ -20,9 +20,7 @@ const styleDescription = {
 	whiteSpace: 'wrap',
 	overflow: 'hidden',
 	textOverflow: 'ellipsis',
-	fontSize: '16px',
-	fontWeight: 400,
-	lineHeight: 1.5,
+	...styleBody2,
 };
 
 export default function Gallery({ camper }) {

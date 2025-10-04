@@ -3,14 +3,27 @@
 import React from 'react';
 import { Box, Button, Grid, TextField, Typography, Stack, Paper } from '@mui/material';
 import { useFormik } from 'formik';
-import { colors } from '../styles/GlobalStyle';
+import { colors, styleH3, styleBody2, styleInputs, styleRedButton } from '../styles/GlobalStyle';
 
-const inputStyles = {
-	lineHeight: 1.5,
-	fontSize: '16px',
-	fontWeight: 400,
-	borderRadius: '10px',
-	bgcolor: `${colors.inputs}`,
+const styleInput = {
+	...styleInputs,
+};
+
+const styleTitle = {
+	width: '100%',
+	...styleH3,
+};
+
+const styleSupporting = {
+	...styleBody2,
+	color: `${colors.grey}`,
+};
+
+const styleSubmitButton = {
+	mt: 1,
+	p: 0,
+	height: '56px',
+	...styleRedButton,
 };
 
 const heightInput = { height: '60px' };
@@ -57,28 +70,13 @@ export default function CampervanBookingForm() {
 				Width: '100%',
 				p: '44px 57px',
 				borderRadius: '10px',
-
 				backgroundColor: 'background.paper',
 			}}>
 			<Grid className="EmailTitle-Grid" container sx={{ gap: 1 }}>
-				<Typography
-					variant="h3"
-					sx={{
-						width: '100%',
-						fontSize: '20px',
-						fontWeight: 600,
-						lineHeight: 1.2,
-					}}>
+				<Typography variant="h3" sx={styleTitle}>
 					Book your campervan now
 				</Typography>
-				<Typography
-					variant="body2"
-					sx={{
-						fontSize: '16px',
-						fontWeight: 400,
-						lineHeight: 1.5,
-						color: `${colors.grey}`,
-					}}>
+				<Typography variant="body2" sx={styleSupporting}>
 					Stay connected! We are always ready to help you.
 				</Typography>
 			</Grid>
@@ -91,7 +89,7 @@ export default function CampervanBookingForm() {
 							name="name"
 							variant="outlined"
 							fullWidth
-							sx={inputStyles}
+							sx={styleInput}
 							value={formik.values.name}
 							onChange={formik.handleChange}
 							onBlur={formik.handleBlur}
@@ -107,7 +105,7 @@ export default function CampervanBookingForm() {
 							name="email"
 							variant="outlined"
 							fullWidth
-							sx={inputStyles}
+							sx={styleInput}
 							value={formik.values.email}
 							onChange={formik.handleChange}
 							onBlur={formik.handleBlur}
@@ -124,7 +122,7 @@ export default function CampervanBookingForm() {
 							variant="outlined"
 							fullWidth
 							type="date"
-							sx={inputStyles}
+							sx={styleInput}
 							value={formik.values.bookingDate}
 							onChange={formik.handleChange}
 							onBlur={formik.handleBlur}
@@ -141,7 +139,7 @@ export default function CampervanBookingForm() {
 							label="Comment"
 							name="comment"
 							variant="outlined"
-							sx={inputStyles}
+							sx={styleInput}
 							fullWidth
 							multiline
 							minRows={4}
@@ -150,18 +148,7 @@ export default function CampervanBookingForm() {
 						/>
 					</Box>
 					<Box sx={{ width: '166px', px: '180px' }}>
-						<Button
-							type="submit"
-							variant="contained"
-							color="error"
-							sx={{
-								mt: 1,
-								p: 0,
-								height: '56px',
-								borderRadius: '200px',
-								textTransform: 'capitalize',
-							}}
-							fullWidth>
+						<Button type="submit" variant="contained" color="error" sx={styleSubmitButton} fullWidth>
 							Send
 						</Button>
 					</Box>

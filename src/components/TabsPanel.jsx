@@ -1,16 +1,14 @@
 /** @format */
 import React, { useState, useEffect } from 'react';
 import { Tabs, Tab, Box } from '@mui/material';
-import { colors } from '../styles/GlobalStyle';
+import { colors, styleH3 } from '../styles/GlobalStyle';
 
 const FeaturesPanel = React.lazy(() => import('./FeaturesPanel'));
 const ReviewsPanel = React.lazy(() => import('./ReviewsPanel'));
 
 const tabsStyles = {
 	pl: 0,
-	fontSize: '20px',
-	fontWeight: 600,
-	lineHeight: 1.2,
+	...styleH3,
 	textTransform: 'capitalize',
 	color: `${colors.main}`,
 	'&.Mui-selected': {
@@ -50,7 +48,7 @@ export default function TabsPanel() {
 					}}
 					value={value}
 					onChange={handleChange}
-					TabIndicatorProps={{ sx: { backgroundColor: `${colors.buttonbu}` } }}>
+					TabIndicatorProps={{ sx: { backgroundColor: `${colors.button}` } }}>
 					<Tab sx={tabsStyles} label="Features" />
 					<Tab sx={tabsStyles} label="Reviews" />
 				</Tabs>

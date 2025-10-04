@@ -2,13 +2,13 @@
 
 import React from 'react';
 import { Grid, Typography } from '@mui/material';
+import { styleBody } from '../styles/GlobalStyle';
 
 const RatingLocation = React.lazy(() => import('./RatingLocation'));
 
 const styleElement = {
-	fontSize: '24px',
+	...styleBody,
 	fontWeight: 600,
-	lineHeight: 1.33,
 };
 
 export default function TestCamperTitle({ camper, layoutMode }) {
