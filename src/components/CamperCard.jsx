@@ -1,14 +1,52 @@
 /** @format */
 
-// src/components/UntitledSvg.jsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Grid, Typography, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { Padding } from '@mui/icons-material';
-import MapIcon from '@mui/icons-material/Map';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { colors, styleRedButton } from '../styles/GlobalStyle';
 
+const Title = React.lazy(() => import('./CamperTitle'));
+const CamperSpecs = React.lazy(() => import('./CamperSpecsList'));
+
+const styleCard = {
+	height: '368px',
+	border: `1px solid ${colors.grey_light}`,
+	borderRadius: '20px',
+	overflow: 'hidden',
+};
+
+const getStyleImage = (camper) => {
+	return {
+		width: '292px',
+		height: '320px',
+		borderRadius: '10px',
+		bgcolor: `${colors.grey_light}`,
+		backgroundImage: `url(${camper.gallery[0].thumb})`,
+		backgroundSize: 'cover',
+	};
+};
+
+const styleInfoTop = {
+	display: 'flex',
+	width: '100%',
+};
+
+const stylesSpecs = {
+	paddingTop: '12px',
+	width: '100%',
+	height: '104px',
+	display: 'flex',
+	flexWrap: 'wrap',
+	gap: '8px',
+};
+
+const styleButtonShowMore = {
+	width: '166px',
+	height: '56px',
+	...styleRedButton,
+};
 export default function CamperCard({ camper }) {
 	const navigate = useNavigate();
 	const favorites = useSelector((s) => s.favorites);
@@ -18,21 +56,8 @@ export default function CamperCard({ camper }) {
 	// Перелік характеристик, які потрібно відобразити
 	const specs = ['transmission', 'engine', 'AC', 'bathroom', 'kitchen', 'TV', 'radio', 'refrigerator', 'microwave', 'gas', 'water'];
 
-	const formatLabel = (key) => {
-		if (!key) return key;
-		if (key.length <= 3) return key.toUpperCase();
-		return key.charAt(0).toUpperCase() + key.slice(1);
-	};
-
 	return (
-		<Box
-			className="Camper-Card"
-			sx={{
-				height: '368px',
-				border: '1px solid #DADDE1',
-				borderRadius: '20px',
-				overflow: 'hidden',
-			}}>
+		<Box className="Camper-Card" sx={styleCard}>
 			<Box
 				className="Card-Item"
 				sx={{
@@ -41,16 +66,7 @@ export default function CamperCard({ camper }) {
 					gap: '24px',
 				}}>
 				{/* Ліва картинка */}
-				<Box
-					className="Camper-Image"
-					sx={{
-						width: '292px',
-						height: '320px',
-						borderRadius: '10px',
-						bgcolor: '#DADDE1',
-						backgroundImage: `url(${camper.gallery[0].thumb})`,
-						backgroundSize: 'cover',
-					}}></Box>
+				<Box className="Camper-Image" sx={getStyleImage(camper)}></Box>
 				{/* Права частина */}
 				<Box
 					className="Camper-Info"
@@ -60,37 +76,11 @@ export default function CamperCard({ camper }) {
 						flexDirection: 'column',
 					}}>
 					<Grid container>
-						<Grid
-							className="Camper-Info-Top"
-							sx={{
-								display: 'flex',
-								width: '100%',
-								justifyContent: 'space-between',
-								fontSize: '24px',
-								lineHeight: 1.33,
-							}}>
-							<Typography className="camper-name" sx={{ fontWeight: 600 }}>
-								{camper.name}
-							</Typography>
-							<Grid sx={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-								<Typography className="camper-price" sx={{ fontWeight: 600 }}>
-									€{camper.price}
-								</Typography>
+						<Grid className="Camper-Info-Top" sx={styleInfoTop}>
+							<Title camper={camper} layoutMode={'flex'} />
+							<Box pt={0.5} pl={1.5}>
 								<FavoriteBorderIcon width="26px" height="24px" />
-							</Grid>
-						</Grid>
-						<Grid sx={{ mt: 1 }}>
-							<Typography
-								className="camper-location"
-								sx={{
-									fontSize: '16px',
-									fontWeight: 400,
-									lineHeight: 1.5,
-									display: 'flex',
-								}}>
-								<MapIcon fontSize="small" />
-								{camper.location}
-							</Typography>
+							</Box>
 						</Grid>
 						<Grid sx={{ mt: 2, height: '100hv', overflow: 'hidden' }}>
 							<Typography
@@ -103,64 +93,13 @@ export default function CamperCard({ camper }) {
 								}}>
 								{camper.description}
 							</Typography>
-							<Box
-								className="camper-specs"
-								sx={{
-									paddingTop: '12px',
-									width: '100%',
-									height: '104px',
-									display: 'flex',
-									flexWrap: 'wrap',
-									gap: '8px',
-								}}>
-								{specs
-									.filter((k) => camper[k])
-									.map((k) => {
-										const val = camper[k];
-										const label = formatLabel(k);
-										const isBooleanTrue = typeof val === 'boolean' && val === true;
-										return (
-											<React.Fragment key={k}>
-												<span
-													className="Types-Item"
-													style={{
-														display: 'flex',
-														minWidth: '50px',
-														alignItems: 'center',
-														height: '48px',
-														justifyContent: 'center',
-														borderRadius: '10px',
-														fontSize: '16px',
-														lineHeight: 1.5,
-														fontWeight: 500,
-														border: '1px solid #F2F4F7',
-														backgroundColor: '#F2F4F7',
-													}}>
-													{isBooleanTrue ? (
-														// тільки ключ для boolean true
-														<span className="Bool-Type">{label}</span>
-													) : (
-														// ключ: значенння для інших типів
-														<span className="Types">{val}</span>
-													)}
-												</span>
-											</React.Fragment>
-										);
-									})}
+							<Box className="camper-specs" sx={stylesSpecs}>
+								<CamperSpecs camper={camper} specs={specs} />
 							</Box>
 						</Grid>
 					</Grid>
 					<Grid sx={{ mt: 'auto' }}>
-						<Button
-							className="ShowMore-Button"
-							style={{
-								width: '166px',
-								height: '56px',
-								color: '#FFF',
-								backgroundColor: '#E44848',
-								borderRadius: '200px',
-							}}
-							onClick={() => navigate(`/catalog/${camper.id}`)}>
+						<Button className="ShowMore-Button" sx={styleButtonShowMore} onClick={() => navigate(`/catalog/${camper.id}`)}>
 							Show More
 						</Button>
 					</Grid>

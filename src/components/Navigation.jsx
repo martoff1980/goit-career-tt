@@ -1,19 +1,18 @@
 /** @format */
 
-import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { Button, Box, useTheme } from '@mui/material';
+import { Box } from '@mui/material';
+import { colors, styleMediumBody2 } from '../styles/GlobalStyle';
 
 const Navigation = () => {
 	const getNavLinkSx = (isActive) => ({
-		fontSize: '16px',
-		lineHeight: 1.5,
+		...styleMediumBody2,
 		border: 'none',
-		color: isActive ? '#101828' : '#D84343',
+		color: isActive ? `${colors.button_hover}` : `${colors.main}`,
 		textDecoration: 'none',
-		'&:hover': {
-			color: isActive ? '#D84343' : '#101828',
-		},
+		// '&:hover': {
+		// 	color: isActive ? '#D84343' : '#101828',
+		// },
 	});
 	return (
 		<Box
@@ -23,13 +22,20 @@ const Navigation = () => {
 				paddingLeft: '430px',
 				gap: '32px',
 			}}>
-			<Box sx={getNavLinkSx} component={NavLink} to="/">
-				Home
-			</Box>
-
-			<Box sx={getNavLinkSx} component={NavLink} to="/catalog">
-				Catalog
-			</Box>
+			<NavLink to="/" style={({ isActive }) => getNavLinkSx(isActive)}>
+				{({ isActive }) => (
+					<Box sx={getNavLinkSx(isActive)} component="span">
+						Home
+					</Box>
+				)}
+			</NavLink>
+			<NavLink to="/catalog" style={({ isActive }) => getNavLinkSx(isActive)}>
+				{({ isActive }) => (
+					<Box sx={getNavLinkSx(isActive)} component="span">
+						Catalog
+					</Box>
+				)}
+			</NavLink>
 		</Box>
 	);
 };
