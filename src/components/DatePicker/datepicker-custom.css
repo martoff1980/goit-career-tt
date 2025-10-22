@@ -1,0 +1,98 @@
+/** @format */
+
+:root {
+	--datepicker-bg: #ffffff;
+	--datepicker-border: #475467;
+	--datepicker-radius: 8px;
+	--datepicker-font: Arial, sans-serif;
+
+	--color-text-primary: #101828;
+	--color-text-secondary: #475467;
+	--color-selected: #475467;
+	--color-hover: #d0e8ff;
+	--color-today-border: #2196f3;
+	--color-keyboard-selected: #6c717b;
+
+	--cell-width: 36px;
+	--cell-height: 32px;
+
+	--padding: 8px;
+}
+
+/*datepicker*/
+.react-datepicker {
+	opacity: 1;
+	background-color: var(--datepicker-bg);
+	border: 1px solid var(--datepicker-border);
+	padding: var(--padding);
+	border-radius: var(--datepicker-radius);
+	font-family: var(--datepicker-font);
+}
+
+/* Header */
+.react-datepicker__header {
+	color: var(--color-text-secondary);
+	background-color: var(--datepicker-bg);
+	border: none;
+}
+
+/* navigation */
+.react-datepicker__navigation {
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+.react-datepicker__navigation-icon::before {
+	border-color: var(--color-text-secondary);
+}
+
+/* names  */
+.react-datepicker__day-name {
+	width: var(--cell-width);
+	height: var(--cell-height);
+	margin-left: -3px;
+	font-weight: bold;
+	text-transform: uppercase;
+	border-bottom: 1px solid var(--color-text-secondary);
+}
+
+/* weekday */
+.react-datepicker__day {
+	width: var(--cell-width);
+	height: var(--cell-height);
+	margin-left: -4px;
+	font-size: 14px;
+	font-weight: 400;
+	color: var(--color-text-primary);
+}
+
+.react-datepicker__day--today {
+	border-radius: 50%;
+	border: 1px solid var(--color-today-border);
+	font-weight: bold;
+}
+
+.react-datepicker__day--today:hover {
+	border-radius: 50%;
+}
+
+.react-datepicker__day--keyboard-selected {
+	background-color: var(--color-keyboard-selected);
+	color: #000;
+	border-radius: 50%;
+}
+
+/* highlighted-day */
+.highlighted-day {
+	background-color: var(--color-selected) !important;
+	color: #fff !important;
+	border-radius: 50%;
+	font-weight: bold;
+}
+
+/* Hover effect */
+.react-datepicker__day:hover {
+	background-color: var(--color-hover);
+	border-radius: 50%;
+}

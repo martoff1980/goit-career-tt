@@ -9,6 +9,8 @@ import CamperCard from '../components/CamperCard';
 import CamperFilters from '../components/CamperFilters';
 import Loader from '../components/Loader';
 import { loadCampers, backPage, nextPage, resetList, setLimit } from '../features/campers/campersSlice';
+import BookingDatePicker from '../components/BookingDatePicker';
+import CustomDatePicker from '../components/DatePicker2';
 
 const styleCatalog = {
 	width: '1440px',
@@ -108,6 +110,8 @@ export default function Catalog() {
 
 	return (
 		<Box className="Camper-Catalog" sx={styleCatalog}>
+			{/* <BookingDatePicker />
+			<CustomDatePicker /> */}
 			<CamperFilters />
 			<div>
 				{status === 'loading' && items.length === 0 ? (

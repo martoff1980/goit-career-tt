@@ -4,9 +4,15 @@ import React from 'react';
 import { Box, Button, Grid, TextField, Typography, Stack, Paper } from '@mui/material';
 import { useFormik } from 'formik';
 import { colors, styleH3, styleBody2, styleInputs, styleRedButton } from '../styles/GlobalStyle';
+import BookingDatePicker from './DatePicker/BookingDatePicker';
 
 const styleInput = {
 	...styleInputs,
+	border: 'none',
+	variant: 'outlined',
+	'& fieldset': {
+		border: 'none',
+	},
 };
 
 const styleTitle = {
@@ -62,7 +68,6 @@ export default function CampervanBookingForm() {
 			resetForm();
 		},
 	});
-
 	return (
 		<Paper
 			// elevation={3}
@@ -114,8 +119,9 @@ export default function CampervanBookingForm() {
 							required
 						/>
 					</Box>
-					<Box height={heightInput}>
-						<TextField
+					<Box sx={{ border: `1px solid ${colors.grey_light}`, height: heightInput, ...styleInput }}>
+						<BookingDatePicker />
+						{/* <TextField
 							className="Date-Input"
 							label="Booking date"
 							name="bookingDate"
@@ -131,7 +137,7 @@ export default function CampervanBookingForm() {
 							InputLabelProps={{ shrink: true }}
 							// placeholder="Booking date*"
 							required
-						/>
+						/> */}
 					</Box>
 					<Box height={heightComment}>
 						<TextField
