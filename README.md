@@ -1,7 +1,9 @@
+<!-- @format -->
+
 # TravelTrucks (Frontend scaffold)
 
-This is a Vite + React starter scaffold for the TravelTrucks frontend (campers catalog).
-It includes:
+This is a Vite + React starter scaffold for the TravelTrucks frontend (campers catalog). It includes:
+
 - React + Vite
 - Redux Toolkit
 - React Router v6
@@ -16,5 +18,8 @@ It includes:
 
 API base used in code: https://66b1f8e71ca8ad33d4f5f63e.mockapi.io
 
+Figma layout: https://www.figma.com/design/6vTbzaB3EPgOreQz2jOJJe/Campers?node-id=0-1&p=f
+
 Notes:
+
 - The project is a scaffold generated automatically. You can further refine components, add real styles, and deploy to Vercel/Netlify.

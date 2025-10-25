@@ -55,7 +55,6 @@ export default function CamperCard({ camper }) {
 
 	// Перелік характеристик, які потрібно відобразити
 	const specs = ['transmission', 'engine', 'AC', 'bathroom', 'kitchen', 'TV', 'radio', 'refrigerator', 'microwave', 'gas', 'water'];
-
 	return (
 		<Box className="Camper-Card" sx={styleCard}>
 			<Box

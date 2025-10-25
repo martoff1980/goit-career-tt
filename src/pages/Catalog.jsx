@@ -2,15 +2,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect, startTransition } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Button, Box, useTheme, OutlinedInput, InputAdornment, List, Grid } from '@mui/material';
-import { colors, styleGreyButton } from '../styles/GlobalStyle';
+import { Button, Box, List } from '@mui/material';
+import { styleGreyButton } from '../styles/GlobalStyle';
 
 import CamperCard from '../components/CamperCard';
 import CamperFilters from '../components/CamperFilters';
 import Loader from '../components/Loader';
 import { loadCampers, backPage, nextPage, resetList, setLimit } from '../features/campers/campersSlice';
-import BookingDatePicker from '../components/BookingDatePicker';
-import CustomDatePicker from '../components/DatePicker2';
 
 const styleCatalog = {
 	width: '1440px',
