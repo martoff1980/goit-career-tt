@@ -6,7 +6,6 @@ import { fetchCampers } from '../../api/campersApi';
 const savedLimit = localStorage.getItem('limit');
 export const loadCampers = createAsyncThunk('campers/load', async (_, { getState }) => {
 	const { filters, campers } = getState();
-	console.log('filters:', filters, 'campers:', campers.limit);
 	const data = await fetchCampers({
 		location: filters.location || undefined,
 		form: filters.form || undefined,
@@ -14,7 +13,6 @@ export const loadCampers = createAsyncThunk('campers/load', async (_, { getState
 		page: campers.page,
 		limit: campers.limit,
 	});
-	// console.log('fetched campers:', data);
 	return data;
 });
 
@@ -23,6 +21,7 @@ const campersSlice = createSlice({
 	initialState: {
 		items: [],
 		page: 1,
+		totalCount: 0,
 		limit: savedLimit ? Number(savedLimit) : 4, //дефолтне значення
 		hasMore: true,
 		status: 'idle',
@@ -32,12 +31,16 @@ const campersSlice = createSlice({
 		resetList(state) {
 			state.items = [];
 			state.page = 1;
+			state.totalCount = 0;
 			state.hasMore = true;
 			state.status = 'idle';
 			state.error = null;
 		},
 		nextPage(state) {
 			state.page += 1;
+		},
+		backPage(state) {
+			state.page = 1;
 		},
 		setLimit: (state, action) => {
 			state.limit = action.payload;
@@ -51,6 +54,7 @@ const campersSlice = createSlice({
 		});
 		b.addCase(loadCampers.fulfilled, (s, { payload }) => {
 			s.status = 'succeeded';
+			s.totalCount = payload.length;
 			if (!Array.isArray(payload) || payload.length === 0) s.hasMore = false;
 			else s.items = [...s.items, ...payload];
 		});
@@ -60,5 +64,5 @@ const campersSlice = createSlice({
 		});
 	},
 });
-export const { resetList, nextPage, setLimit } = campersSlice.actions;
+export const { resetList, backPage, nextPage, setLimit } = campersSlice.actions;
 export default campersSlice.reducer;
